@@ -101,6 +101,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Enable custom user model for authentication
+AUTH_USER_MODEL = "dbs.CustomUser"
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
