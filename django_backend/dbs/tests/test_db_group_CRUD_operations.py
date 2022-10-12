@@ -1,19 +1,25 @@
 from django.test import TestCase
-from ..models import CustomUser
-from datetime import datetime
+from ..models import Group, CustomUser
 
 
 # Create test cases here!
-class AddCustomUser(TestCase):
+class AddGroup(TestCase):
 
-    def test_add_custom_user(self):
+    def setUp(self):
+        groupowner = CustomUser.objects.create_user(username='groupowner', email='owner@owner.ow', password='ownerpassword')
+        member1 = CustomUser.objects.create_user(username='member1', email='member1@member.me', password='memberpassword')
+        member2 = CustomUser.objects.create_user(username='member2', email='member2@member.me', password='memberpassword')
 
-        time = datetime.now()
-        u = CustomUser.objects.create_user(username= 'testuser', email= 'test@test.te', password= "testpassword")
+    def test_add_group(self):
+
+        g = Group(name='testgroup', description='test_description')
+
+        g.save()
 
         # Test on instantiating model:
-        self.assertTrue(isinstance(u, CustomUser))
+        self.assertTrue(isinstance(g, Group))
 
+"""
         # Test for correct field contents:
         self.assertEqual(u.username, 'testuser')
 
@@ -90,5 +96,6 @@ class DeleteCustomUser(TestCase):
         CustomUser.objects.get(pk=1).delete()
         self.assertEqual(len(CustomUser.objects.all()), 1)
         self.assertEqual(CustomUser.objects.get(pk=2).username, 'testuser2')
-        with self.assertRaises(CustomUser.DoesNotExist):
-            should_not_exist = CustomUser.objects.get(pk=1)
+        with self.assertRaises(CustomUser.DoesNotExist): should_not_exist = CustomUser.objects.get(pk=1)
+
+"""
