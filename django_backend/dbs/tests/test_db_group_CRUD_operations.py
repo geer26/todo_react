@@ -12,12 +12,17 @@ class AddGroup(TestCase):
 
     def test_add_group(self):
 
-        g = Group(name='testgroup', description='test_description')
+        groupowner = CustomUser.objects.get(username='groupowner')
+        member1 = CustomUser.objects.get(username='member1')
+        member2 = CustomUser.objects.get(username='member2')
 
+        g = Group(name='testgroup', description='test_description')
         g.save()
+        g.users.add(groupowner)
 
         # Test on instantiating model:
         self.assertTrue(isinstance(g, Group))
+        #self.assertTrue(g.users.related_model, 2)
 
 """
         # Test for correct field contents:
