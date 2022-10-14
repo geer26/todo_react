@@ -3,20 +3,18 @@ from .models import CustomUser, Group
 from .forms import CustomUserCreationForm, CustomUserChangeForm, CustomPasswordChangeForm, CustomGroupCreationForm
 
 # Register your models here.
-
-"""
-class CustomUserCreation():
+class CustomUserAdmin(admin.ModelAdmin):
+    fields = ('username', 'email')
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = CustomUser
-    list_display = ['email', 'username', 'full_name']
 
-class Customgroup():
+
+class CustomGroupAdmin(admin.ModelAdmin):
     add_form = CustomGroupCreationForm
     model = Group
-    list_display = ['name', 'description',]
-    
-"""
+    list_display = ['name', 'description', ]
 
-admin.site.register(CustomUser)
-admin.site.register(Group)
+
+admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(Group, CustomGroupAdmin)

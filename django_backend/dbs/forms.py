@@ -2,15 +2,19 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from .models import CustomUser, Group
 
-class CustomUserCreationForm(forms.Form):
+class CustomUserCreationForm(UserCreationForm):
     username = forms.CharField(label='Username', max_length=50, required=True)
     email = forms.EmailField(label='Email', required=False, max_length=50)
     password = forms.CharField(label='Password', widget=forms.PasswordInput, required=True)
     password2 = forms.CharField(label='Password again', widget=forms.PasswordInput, required=True)
     #template_name = "form_snippet.html"
 
+    class Meta:
+        model = CustomUser
+        fields = ('username', 'email')
 
-class CustomUserChangeForm(forms.Form):
+
+class CustomUserChangeForm(UserCreationForm):
     username = forms.CharField(label='Username', max_length=50, required=True)
     email = forms.EmailField(label='Email', required=False, max_length=50)
     # template_name = "form_snippet.html"
